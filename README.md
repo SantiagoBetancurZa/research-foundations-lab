@@ -8,6 +8,8 @@ and turn their own everyday observations into a full research design with AI.
 **Live demo:** https://research-foundations-lab.vercel.app · **Category:** Education & Accessibility · Built for the
 [Global STEM Innovation Challenge 2026](https://stem-innovation-challenge-2026.devpost.com/)
 
+![The Method module: ten flashcards on a blue grid; the second card is flipped to show its definition](docs/screenshots/method-flashcards.jpg)
+
 ## The problem
 
 Students often memorise the steps of the scientific method without ever seeing why design decisions
@@ -66,6 +68,8 @@ on those commits.
 - Pearson's r with its t-test, a Fisher-z confidence interval and the least-squares line.
 - Empirical power: the same study repeated 100 times with new samples.
 - p-values formatted in APA style (`p = .032`, `p < .001`), with a decimal comma in Spanish.
+
+![The simulator after repeating a study 100 times: 80 of 100 studies found p < .05, which is the design's statistical power, next to a histogram of the 100 differences in means](docs/screenshots/simulator-power.jpg)
 
 ## Design
 
