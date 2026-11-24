@@ -43,11 +43,18 @@ textarea {
   scrollbar-width: thin;
 }
 
-/* Visible focus for keyboard users on light and dark surfaces: indigo ring plus a white halo. */
-:focus-visible {
-  outline: 3px solid #4338ca;
-  outline-offset: 3px;
-  box-shadow: 0 0 0 3px #fff;
+/* Visible focus for keyboard users on light and dark surfaces: indigo ring plus a white halo.
+   Kept in the base layer so utilities such as focus:outline-none can still override it. */
+@layer base {
+  :focus-visible {
+    outline: 3px solid #4338ca;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px #fff;
+  }
+
+  [tabindex='-1']:focus-visible {
+    box-shadow: none;
+  }
 }
 
 /* Respect the operating-system setting to reduce motion. */

@@ -298,25 +298,20 @@ const en = {
       focusLabel: 'Working hypothesis',
       focus:
         'If students read with music with lyrics, then their average score will be lower than in the silent condition.',
-      sample: '48 students randomly assigned to a control group and an experimental group.',
-      procedure:
-        'Both groups read the same text for 15 minutes and then answer a 10-item test.',
+      sample: (n) =>
+        `${n * 2} students randomly assigned to a control group and an experimental group (${n} in each).`,
+      procedure: 'Both groups read the same text for 15 minutes and then answer a 10-item test.',
       executionLabel: 'Simulate a controlled experiment',
-      executionText: 'Applying the reading, the comprehension test and the score record.',
-      resultMode: 'comparison',
-      metricLabel: 'Average score out of 100',
-      bars: [
-        { label: 'Control: silence', value: 82, color: 'bg-slate-400' },
-        { label: 'Experimental: music with lyrics', value: 68, color: 'bg-indigo-500' },
-      ],
-      keyInsight:
-        'The control group scored 14 points higher than the experimental group, which suggests a negative effect of music with lyrics on this short task.',
+      executionText:
+        'Each run draws a new random sample of students, applies the reading and the test, and records the scores.',
+      groups: ['Silence (control)', 'Music with lyrics'],
+      metric: 'Comprehension score (0–100)',
       discussion:
-        'The findings support the hypothesis and are consistent with the idea that lyrics compete for attention during reading.',
+        'If the difference holds across new samples, the result is consistent with the idea that lyrics compete for attention during reading. Compare the effect size with previous studies before drawing conclusions.',
       limitation:
-        'The simulation represents a single short session; it cannot tell whether the effect lasts over time.',
+        'Each run represents a single short session with simulated students; it cannot tell whether the effect lasts over time or appears in other tasks.',
       communication:
-        'Report it with a bar chart, a score table and a short discussion of attentional distractors.',
+        'Report the means, standard deviations, the t-test, the effect size and a dot plot like this one, plus a short discussion of attentional distractors.',
     },
     'ai-drafts': {
       objective:
@@ -324,30 +319,27 @@ const en = {
       focusLabel: 'Working assumption',
       focus:
         'AI support may improve the initial structure of the text, although it does not guarantee more autonomy or deeper arguments.',
-      sample: '36 students divided into two equivalent groups with the same writing prompt.',
+      sample: (n) =>
+        `${n * 2} students divided into two equivalent groups (${n} in each) with the same writing prompt.`,
       procedure:
         'The rubric scores of the first draft are compared, and perceptions are then gathered through short interviews.',
       executionLabel: 'Simulate a mixed-methods study',
-      executionText: 'Processing assessment rubrics and qualitative testimonies from the participants.',
-      resultMode: 'mixed',
-      metricLabel: 'Average rubric score out of 100',
-      bars: [
-        { label: 'Without AI', value: 72, color: 'bg-slate-400' },
-        { label: 'With AI', value: 84, color: 'bg-emerald-500' },
-      ],
+      executionText:
+        'Each run draws a new sample of drafts, scores them with the rubric and gathers the interview themes.',
+      groups: ['Without AI (control)', 'With AI'],
+      metric: 'Rubric score (0–100)',
+      secondaryTitle: 'Qualitative strand: what the interviews say (illustrative)',
       secondaryFindings: [
         'The improvement was more visible in organization and initial clarity than in the originality of the arguments.',
         'Most students reported that AI helped them start the draft faster.',
         'Some students also worried about relying too much on external suggestions.',
       ],
-      keyInsight:
-        'The AI-supported group scored 12 points higher on the first version, but the benefit was concentrated in structure and getting started.',
       discussion:
-        'The result suggests methodological value for planning, although autonomous learning still depends on the student’s own judgment.',
+        'The numbers show how much the structure changes; the interviews explain why and at what cost. A higher rubric score does not prove deeper learning, so both strands must be read together.',
       limitation:
         'The simulation only assesses the first draft; it does not measure later revisions or final conceptual depth.',
       communication:
-        'Report the rubric chart together with short interview quotes to show the value of the mixed approach.',
+        'Report the rubric chart and the test results together with short interview quotes to show the value of the mixed approach.',
     },
     'phone-sleep': {
       objective:
@@ -355,26 +347,23 @@ const en = {
       focusLabel: 'Guiding question',
       focus:
         'The goal is to find out whether there is a consistent association, without claiming causation, because nothing is manipulated experimentally.',
-      sample:
-        '64 students from the same cohort who answered a survey on night-time habits and sleep quality.',
+      sample: (n) =>
+        `${n} students from the same cohort who answered a survey on night-time habits and sleep quality.`,
       procedure:
-        'Frequencies, cross-tabulations and association patterns between screen time and self-reported rest are consolidated.',
+        'Phone minutes and sleep-quality scores are plotted and correlated, and the share of heavy users and poor sleepers is calculated.',
       executionLabel: 'Simulate a descriptive study',
-      executionText: 'Consolidating surveys, frequency tables and association patterns.',
-      resultMode: 'association',
-      stats: [
-        { label: 'Use > 60 min before sleeping', value: '62%' },
-        { label: 'Fair or poor sleep', value: '58%' },
-        { label: 'Observed pattern', value: 'Moderate positive association' },
-      ],
-      keyInsight:
-        'The longer the night-time phone use, the worse the sleep quality reported by a large part of the group.',
+      executionText:
+        'Each run surveys a new random sample of students and records their phone minutes and their sleep quality.',
+      xLabel: 'Phone use before sleeping (minutes)',
+      yLabel: 'Sleep quality (0–10)',
+      heavyUse: 'Use > 60 min before sleeping',
+      poorSleep: 'Fair or poor sleep (score below 5)',
       discussion:
-        'The pattern is consistent with the sleep-hygiene literature, but it is still a correlation, not proof of causation.',
+        'The pattern is consistent with the sleep-hygiene literature, but it is still a correlation, not proof of causation: stress, workload or caffeine could explain both.',
       limitation:
         'The data are self-reported and may be affected by memory, subjective perception or other night-time habits.',
       communication:
-        'Present it with frequency tables, a comparison chart and an explicit warning about correlation versus causation.',
+        'Present it with a scatter plot, a frequency table and an explicit warning about correlation versus causation.',
     },
     'online-forums': {
       objective:
@@ -382,12 +371,13 @@ const en = {
       focusLabel: 'Analytical focus',
       focus:
         'The aim is to identify emerging categories about usefulness, academic community and obstacles to participation.',
-      sample: '16 students selected with different levels of participation in the same online course.',
+      sample: (n) =>
+        `${n * 2} students chosen on purpose from the same online course: ${n} active participants and ${n} readers.`,
       procedure:
         'Interviews and participation logs are analyzed to identify recurring themes and contrasts between profiles.',
       executionLabel: 'Simulate a qualitative study',
       executionText: 'Coding interviews, focus-group notes and the course participation logs.',
-      resultMode: 'themes',
+      profiles: ['Active participants', 'Readers'],
       themes: [
         {
           title: 'Conceptual clarity',
@@ -405,6 +395,8 @@ const en = {
             'Fear of being wrong, a feeling of public exposure and lack of time to contribute calmly come up.',
         },
       ],
+      countsNote:
+        'Counts only show how widespread each theme is in this small, purposive sample. Qualitative analysis does not use p-values: its strength is the meaning of what participants say.',
       keyInsight:
         'The educational value of the forum depends less on the number of messages and more on the quality of the interaction and on feeling safe to participate.',
       discussion:
