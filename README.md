@@ -5,7 +5,7 @@ observation to a written article. Students flip through the steps of the scienti
 real cases, run a study simulator that draws **real random samples and computes real statistics**,
 and turn their own everyday observations into a full research design with AI.
 
-**Live demo:** _coming soon_ · **Category:** Education & Accessibility · Built for the
+**Live demo:** https://research-foundations-lab.vercel.app · **Category:** Education & Accessibility · Built for the
 [Global STEM Innovation Challenge 2026](https://stem-innovation-challenge-2026.devpost.com/)
 
 ## The problem
@@ -49,7 +49,7 @@ and some text colours were below WCAG AA contrast.
 | [`175aaba`](https://github.com/SantiagoBetancurZa/research-foundations-lab/commit/175aaba) | Accessibility: keyboard tabs (WAI-ARIA), flashcards as real buttons, visible focus, contrast, reduced motion, skip link. |
 | [`27ffeb2`](https://github.com/SantiagoBetancurZa/research-foundations-lab/commit/27ffeb2) | Simulator with real statistics: seeded samples, Welch's t-test, Cohen's d, Pearson's r, power by replication, accessible charts. |
 | [`f476d89`](https://github.com/SantiagoBetancurZa/research-foundations-lab/commit/f476d89) | Full Spanish version with correct accents; remembered language choice. |
-| [`c5fbd81`](https://github.com/SantiagoBetancurZa/research-foundations-lab/commit/c5fbd81) | Redesign with the visual system of my YouTube channel; English / Español switcher. |
+| [`c5fbd81`](https://github.com/SantiagoBetancurZa/research-foundations-lab/commit/c5fbd81) | Redesign with the visual system of my YouTube channel, [Gamification Lab](https://www.youtube.com/channel/UCQgyEpxKxBeUFWWmEvSPk1A); English / Español switcher. |
 
 Development during the competition was assisted by Claude Code (Anthropic), credited as co-author
 on those commits.
@@ -66,6 +66,13 @@ on those commits.
 - Pearson's r with its t-test, a Fisher-z confidence interval and the least-squares line.
 - Empirical power: the same study repeated 100 times with new samples.
 - p-values formatted in APA style (`p = .032`, `p < .001`), with a decimal comma in Spanish.
+
+## Design
+
+The interface uses the visual system of my YouTube channel, [Gamification Lab](https://www.youtube.com/channel/UCQgyEpxKxBeUFWWmEvSPk1A): a blue canvas with the
+channel grid, flashcards with a 2 px blue border and a solid offset shadow that flip to a blue grid
+back, and the Inclusive Sans typeface. The palette is limited to the channel tokens (three blues, a
+detail blue, ink and neutrals).
 
 ## Accessibility
 

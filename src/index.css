@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Visual system of the author's YouTube channel (canvas "lienzo" 1920×1080): a blue grid canvas,
+/* Visual system of the author's YouTube channel, Gamification Lab (canvas 1920×1080): a blue grid canvas,
    white flashcards with a 2 px blue border and a solid offset shadow, and the Inclusive Sans
    typeface. Token names follow the channel's design file. */
 @theme {

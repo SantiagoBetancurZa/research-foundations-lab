@@ -23,7 +23,7 @@ const en = {
   },
   footer: {
     credit:
-      'Educational tool designed by Professor Santiago Betancur Zapata to foster critical and experimental thinking.',
+      'Built by Santiago Betancur Zapata to foster critical and experimental thinking.',
     visit: 'Visit:',
   },
   method: {
@@ -260,7 +260,7 @@ const es = {
   },
   footer: {
     credit:
-      'Herramienta educativa diseñada por el profesor Santiago Betancur Zapata para fomentar el pensamiento crítico y experimental.',
+      'Hecho por Santiago Betancur Zapata para fomentar el pensamiento crítico y experimental.',
     visit: 'Visita:',
   },
   method: {
