@@ -14,8 +14,8 @@ export default function CasesTab({ onUseCase }) {
   return (
     <Panel>
       <div className="mb-8 text-center">
-        <h2 className="mb-2 text-2xl font-bold text-gray-800">{t.title}</h2>
-        <p className="mx-auto max-w-3xl text-gray-600">{t.intro}</p>
+        <h2 className="mb-2 text-2xl font-semibold text-ink-900">{t.title}</h2>
+        <p className="mx-auto max-w-3xl text-gray-800">{t.intro}</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[320px_1fr]">
@@ -26,38 +26,38 @@ export default function CasesTab({ onUseCase }) {
               type="button"
               onClick={() => setSelectedCaseId(researchCase.id)}
               aria-pressed={researchCase.id === selectedCaseId}
-              className={`w-full rounded-2xl border p-4 text-left transition-all ${
+              className={`w-full rounded-card border p-4 text-left transition-all ${
                 researchCase.id === selectedCaseId
-                  ? 'border-indigo-300 bg-indigo-50 shadow-md shadow-indigo-100'
-                  : 'border-gray-200 bg-white hover:border-indigo-200 hover:bg-gray-50'
+                  ? 'border-primary-300/85 bg-primary-400/8 shadow-card'
+                  : 'border-gray-300 bg-white hover:border-primary-300/85 hover:bg-white'
               }`}
             >
               <div className="mb-3 flex items-start justify-between gap-3">
-                <span className="rounded-full bg-gray-100 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-gray-600">
+                <span className="rounded-full bg-gray-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-800">
                   {researchCase.area}
                 </span>
-                <span className="rounded-full bg-slate-900 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
+                <span className="rounded-full bg-primary-500 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
                   {researchCase.method}
                 </span>
               </div>
-              <h3 className="mb-2 text-lg font-bold text-gray-900">{researchCase.title}</h3>
-              <p className="text-sm leading-relaxed text-gray-600">{researchCase.hook}</p>
+              <h3 className="mb-2 text-lg font-semibold text-ink-900">{researchCase.title}</h3>
+              <p className="text-sm leading-relaxed text-gray-800">{researchCase.hook}</p>
             </button>
           ))}
         </div>
 
         <div
           key={selectedCase.id}
-          className="animate-fade-in-up rounded-3xl bg-slate-900 p-6 text-white shadow-2xl md:p-8"
+          className="animate-fade-in-up rounded-card bg-primary-500 grid-lines p-6 text-white shadow-card-lg md:p-8"
         >
           <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
-              <p className="mb-2 text-xs font-black uppercase tracking-[0.25em] text-indigo-200">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-white">
                 {selectedCase.area}
               </p>
-              <h3 className="text-2xl font-bold md:text-3xl">{selectedCase.title}</h3>
+              <h3 className="text-2xl font-semibold md:text-3xl">{selectedCase.title}</h3>
             </div>
-            <span className="inline-flex w-fit rounded-full border border-indigo-300/30 bg-indigo-400/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-indigo-100">
+            <span className="inline-flex w-fit rounded-full border border-primary-300/85 bg-primary-400/15 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
               {t.level(selectedCase.level)}
             </span>
           </div>
@@ -69,10 +69,10 @@ export default function CasesTab({ onUseCase }) {
             <CaseInfoCard icon={LineChart} label={t.analysis} text={selectedCase.analysis} />
           </div>
 
-          <div className="mt-6 rounded-3xl bg-white p-5 text-slate-900 shadow-lg">
+          <div className="mt-6 rounded-card bg-white p-5 text-ink-900 shadow-card">
             <div className="mb-4 flex items-center gap-2">
-              <ClipboardList size={20} className="text-indigo-600" />
-              <h4 className="text-lg font-bold">{t.variablesTitle}</h4>
+              <ClipboardList size={20} className="text-primary-400" />
+              <h4 className="text-lg font-semibold">{t.variablesTitle}</h4>
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <VariableCard label={t.independent} value={selectedCase.variables.independent} />
@@ -85,17 +85,17 @@ export default function CasesTab({ onUseCase }) {
             </div>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-emerald-300/20 bg-emerald-400/10 p-4">
-            <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-emerald-200">
+          <div className="mt-6 rounded-card border border-primary-300/85 bg-primary-400/10 p-4">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-white">
               {t.seed}
             </p>
-            <p className="text-sm leading-relaxed text-emerald-50">{selectedCase.seedObservation}</p>
+            <p className="text-sm leading-relaxed text-white">{selectedCase.seedObservation}</p>
           </div>
 
           <button
             type="button"
             onClick={() => onUseCase(selectedCase.id)}
-            className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-500 px-4 py-3 font-bold text-white transition-colors hover:bg-indigo-400"
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-card bg-primary-400 px-4 py-3 font-semibold text-white transition-colors hover:bg-primary-400"
           >
             {t.useInAi}
             <ArrowRight size={18} />

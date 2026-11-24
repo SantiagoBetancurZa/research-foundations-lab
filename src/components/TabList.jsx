@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 
 // WAI-ARIA tabs pattern: one Tab stop for the list, arrow keys / Home / End move between tabs.
+// Styled as chips on the blue canvas; the selected one is a white card.
 export default function TabList({ tabs, activeId, onChange, label }) {
   const refs = useRef({});
 
@@ -18,11 +19,7 @@ export default function TabList({ tabs, activeId, onChange, label }) {
   };
 
   return (
-    <div
-      role="tablist"
-      aria-label={label}
-      className="thin-scrollbar flex overflow-x-auto border-b border-gray-200 pt-1"
-    >
+    <div role="tablist" aria-label={label} className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
       {tabs.map((tab, index) => {
         const active = tab.id === activeId;
         const Icon = tab.icon;
@@ -40,14 +37,14 @@ export default function TabList({ tabs, activeId, onChange, label }) {
             tabIndex={active ? 0 : -1}
             onClick={() => onChange(tab.id)}
             onKeyDown={(event) => handleKeyDown(event, index)}
-            className={`flex shrink-0 items-center gap-2 rounded-t-lg px-3 py-3 text-sm font-medium transition-colors sm:px-4 sm:text-base ${
+            className={`press flex items-center justify-center gap-2 rounded-card border-2 px-3 py-2.5 text-sm font-medium sm:text-base ${
               active
-                ? 'border-t-2 border-indigo-600 bg-white text-indigo-700 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'border-white bg-white text-primary-500 shadow-deep-sm'
+                : 'border-white/45 text-white hover:bg-white/10'
             }`}
           >
-            <Icon size={20} />
-            <span className="whitespace-nowrap">{tab.label}</span>
+            <Icon size={18} strokeWidth={2} className="shrink-0" />
+            <span className="text-left leading-tight sm:whitespace-nowrap">{tab.label}</span>
           </button>
         );
       })}

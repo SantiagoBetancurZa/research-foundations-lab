@@ -21,25 +21,49 @@ function useFlipState(items) {
   };
 }
 
+const number = (index) => String(index + 1).padStart(2, '0');
+
+// Front of a flashcard: number, optional icon as the illustration, and the term.
+function CardFront({ index, icon: Icon, term }) {
+  return (
+    <>
+      <span className="eyebrow text-primary-400">{number(index)}</span>
+      {Icon && <Icon size={44} strokeWidth={1.5} className="mt-4 text-primary-400" />}
+      <span className="mt-4 block text-lg font-medium uppercase tracking-wide text-ink-900">{term}</span>
+    </>
+  );
+}
+
+// Back of a flashcard: the term as a label and the definition, on the blue grid.
+function CardBack({ index, term, text }) {
+  return (
+    <>
+      <span className="eyebrow mb-3 block border-b-2 border-white/45 pb-2 text-white">
+        {number(index)} · {term}
+      </span>
+      <span className="block text-base leading-relaxed text-white">{text}</span>
+    </>
+  );
+}
+
 function CardGrid({ title, intro, items, columns, renderCard }) {
   const { ui } = useLanguage();
   const state = useFlipState(items);
   return (
     <Panel>
-      <h2 className="mb-2 text-center text-2xl font-bold text-gray-800">{title}</h2>
-      <p className="mb-4 text-center text-gray-600">{intro}</p>
-      <div className="mb-6 flex justify-center">
+      <h2 className="mb-2 text-center text-3xl font-medium text-ink-900">{title}</h2>
+      <p className="mx-auto mb-5 max-w-3xl text-center text-gray-800">{intro}</p>
+      <div className="mb-8 flex justify-center">
         <button
           type="button"
-          aria-pressed={state.allFlipped}
           onClick={state.toggleAll}
-          className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-4 py-2 text-sm font-semibold text-indigo-800 transition-colors hover:bg-indigo-50"
+          className="press inline-flex items-center gap-2 rounded-card border-2 border-primary-300/85 bg-white px-4 py-2 text-sm font-medium text-primary-500 shadow-card-sm"
         >
           {state.allFlipped ? <EyeOff size={16} /> : <Eye size={16} />}
           {state.allFlipped ? ui.common.hideAll : ui.common.revealAll}
         </button>
       </div>
-      <ul className={`grid grid-cols-1 gap-6 md:grid-cols-2 ${columns}`}>
+      <ul className={`grid grid-cols-1 gap-6 sm:grid-cols-2 ${columns}`}>
         {items.map((item, index) => (
           <li key={item.id}>
             {renderCard(item, index, {
@@ -62,34 +86,13 @@ export function MethodTab() {
       intro={ui.method.intro}
       items={content.processSteps}
       columns="lg:grid-cols-3 xl:grid-cols-4"
-      renderCard={(step, index, cardProps) => {
-        const Icon = step.icon;
-        return (
-          <FlipCard
-            {...cardProps}
-            frontClass="border-2 border-indigo-100 bg-indigo-50 p-6 shadow-sm group-hover:shadow-md"
-            backClass="border-2 border-indigo-800 bg-indigo-700 p-6 shadow-md"
-            front={
-              <>
-                <span className="mb-4 rounded-full bg-white p-4 text-indigo-700 shadow-sm">
-                  <Icon size={32} />
-                </span>
-                <span className="block text-xl font-extrabold text-gray-900">
-                  {String(index + 1).padStart(2, '0')}. {step.title}
-                </span>
-              </>
-            }
-            back={
-              <>
-                <span className="mb-3 block w-full border-b border-indigo-400 pb-2 text-lg font-bold text-white">
-                  {step.title}
-                </span>
-                <span className="block text-sm leading-relaxed text-white">{step.desc}</span>
-              </>
-            }
-          />
-        );
-      }}
+      renderCard={(step, index, cardProps) => (
+        <FlipCard
+          {...cardProps}
+          front={<CardFront index={index} icon={step.icon} term={step.title} />}
+          back={<CardBack index={index} term={step.title} text={step.desc} />}
+        />
+      )}
     />
   );
 }
@@ -105,17 +108,8 @@ export function ConceptsTab() {
       renderCard={(concept, index, cardProps) => (
         <FlipCard
           {...cardProps}
-          frontClass={`${concept.color} border-2 p-6 shadow-sm group-hover:shadow-md`}
-          backClass="border-2 border-gray-200 bg-white p-6 shadow-sm"
-          front={<span className="block text-xl font-bold text-gray-900">{concept.term}</span>}
-          back={
-            <>
-              <span className="mb-3 block text-sm font-bold uppercase tracking-wide text-gray-600">
-                {concept.term}
-              </span>
-              <span className="block text-base leading-relaxed text-gray-800">{concept.definition}</span>
-            </>
-          }
+          front={<CardFront index={index} term={concept.term} />}
+          back={<CardBack index={index} term={concept.term} text={concept.definition} />}
         />
       )}
     />
@@ -130,34 +124,13 @@ export function ResearchTypesTab() {
       intro={ui.researchTypes.intro}
       items={content.researchTypes}
       columns="lg:grid-cols-3"
-      renderCard={(method, index, cardProps) => {
-        const Icon = method.icon;
-        return (
-          <FlipCard
-            {...cardProps}
-            frontClass={`${method.color} border-2 p-6 shadow-sm group-hover:shadow-md`}
-            backClass={`${method.back} border-2 p-6 shadow-lg`}
-            front={
-              <>
-                <span className="mb-4 rounded-full bg-white/80 p-4 text-gray-800 shadow-sm">
-                  <Icon size={32} />
-                </span>
-                <span className="block text-xl font-bold text-gray-900">{method.term}</span>
-              </>
-            }
-            back={
-              <>
-                <span className="mb-3 block text-sm font-bold uppercase tracking-widest text-white">
-                  {method.term}
-                </span>
-                <span className="block text-base font-medium leading-relaxed text-white">
-                  {method.definition}
-                </span>
-              </>
-            }
-          />
-        );
-      }}
+      renderCard={(method, index, cardProps) => (
+        <FlipCard
+          {...cardProps}
+          front={<CardFront index={index} icon={method.icon} term={method.term} />}
+          back={<CardBack index={index} term={method.term} text={method.definition} />}
+        />
+      )}
     />
   );
 }
@@ -170,34 +143,13 @@ export function InstrumentsTab() {
       intro={ui.instruments.intro}
       items={content.instruments}
       columns="lg:grid-cols-3"
-      renderCard={(instrument, index, cardProps) => {
-        const Icon = instrument.icon;
-        return (
-          <FlipCard
-            {...cardProps}
-            frontClass={`${instrument.color} border-2 p-6 shadow-sm group-hover:shadow-md`}
-            backClass="border-2 border-gray-200 bg-white p-6 shadow-lg"
-            front={
-              <>
-                <span className="mb-4 rounded-full bg-white/80 p-4 text-gray-700 shadow-sm">
-                  <Icon size={32} />
-                </span>
-                <span className="block text-xl font-bold text-gray-900">{instrument.term}</span>
-              </>
-            }
-            back={
-              <>
-                <span className="mb-3 block text-sm font-bold uppercase tracking-widest text-gray-600">
-                  {instrument.term}
-                </span>
-                <span className="block text-base font-medium leading-relaxed text-gray-800">
-                  {instrument.definition}
-                </span>
-              </>
-            }
-          />
-        );
-      }}
+      renderCard={(instrument, index, cardProps) => (
+        <FlipCard
+          {...cardProps}
+          front={<CardFront index={index} icon={instrument.icon} term={instrument.term} />}
+          back={<CardBack index={index} term={instrument.term} text={instrument.definition} />}
+        />
+      )}
     />
   );
 }

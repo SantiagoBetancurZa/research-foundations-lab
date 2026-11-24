@@ -1,27 +1,185 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
+/* Visual system of the author's YouTube channel (canvas "lienzo" 1920×1080): a blue grid canvas,
+   white flashcards with a 2 px blue border and a solid offset shadow, and the Inclusive Sans
+   typeface. Token names follow the channel's design file. */
+@theme {
+  --font-sans: "Inclusive Sans Variable", "Inclusive Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary-300: #0072f5; /* bright variant: borders and lines, never behind small text */
+  --color-primary-400: #0064d6; /* main blue */
+  --color-primary-500: #0052ba; /* shadow base, deep surfaces */
+  --color-detail-400: #417bee; /* detail lines, no text on top */
+  --color-ink-900: #1f2328; /* titles and text */
+  --color-paper: #fffdf8;
+  --color-gray-50: #eeeeee;
+  --color-gray-100: #e3e3e3;
+  --color-gray-200: #e0e0e0;
+  --color-gray-300: #c7c8c7;
+  --color-gray-800: #313642;
+  --color-gray-900: #222222;
+
+  --radius-card: 10px;
+
+  --shadow-card-sm: 4px 4px 0 0 rgb(0 82 186 / 0.16);
+  --shadow-card: 6px 6px 0 0 rgb(0 82 186 / 0.16);
+  --shadow-card-lg: 10px 10px 0 0 rgb(0 82 186 / 0.16);
+  --shadow-deep-sm: 4px 4px 0 0 #0052ba;
+  --shadow-deep: 10px 10px 0 0 #0052ba;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  background: #f9fafb;
+@layer base {
+  :root {
+    --grid-cell: 60px;
+    --grid-line: rgb(255 255 255 / 0.18);
+    --texture-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    /* Keyboard focus: dark ring on light surfaces, white ring on the blue canvas. */
+    --focus-ring: var(--color-ink-900);
+    font-synthesis-weight: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background-color: var(--color-primary-400);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+  }
+
+  /* The canvas stays fixed like the video frame while the content scrolls over it:
+     grid (white 18 %), soft light at the centre (kept at 8 % so white text stays above 4.5:1),
+     vignette at the edges, then grain at 5 %. */
+  body::before,
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  body::before {
+    background-image:
+      radial-gradient(ellipse 75% 75% at 50% 50%, transparent 40%, rgb(0 0 0 / 0.12) 100%),
+      radial-gradient(ellipse 55% 60% at 50% 40%, rgb(255 255 255 / 0.08), transparent 100%),
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size:
+      auto,
+      auto,
+      var(--grid-cell) var(--grid-cell),
+      var(--grid-cell) var(--grid-cell);
+  }
+
+  body::after {
+    background-image: var(--texture-grain);
+    opacity: 0.05;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
 }
 
-* {
-  box-sizing: border-box;
+@media (max-width: 640px) {
+  :root {
+    --grid-cell: 40px;
+  }
 }
 
-button,
-input,
-textarea {
-  font: inherit;
-}
+@layer components {
+  /* Elements placed directly on the blue canvas. */
+  .on-blue {
+    --focus-ring: #fff;
+  }
 
-#root {
-  min-height: 100vh;
+  /* Light surfaces inside the canvas reset the focus colour. */
+  .on-light {
+    --focus-ring: var(--color-ink-900);
+  }
+
+  /* Flashcard: the channel's card (white, 2 px border primary/300 at 85 %, radius 10). */
+  .flashcard {
+    background-color: #fff;
+    border: 2px solid rgb(0 114 245 / 0.85);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* grid/on-white: white surface with gray/100 lines. */
+  .grid-on-white {
+    background-color: #fff;
+    background-image:
+      linear-gradient(to right, var(--color-gray-100) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-gray-100) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* grid/on-blue at card scale: the back of a flashcard and the deep panels. */
+  .grid-on-blue {
+    background-color: var(--color-primary-400);
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.18) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.18) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: #fff;
+    --focus-ring: #fff;
+  }
+
+  /* Grid lines only, for deep blue surfaces that keep their own colour. */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.18) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.18) 1px, transparent 1px);
+    background-size: 24px 24px;
+    --focus-ring: #fff;
+  }
+
+  /* Small uppercase label used above titles. */
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  /* Tactile buttons: they lift on hover and press into their shadow. */
+  .press {
+    transition:
+      transform 120ms ease,
+      box-shadow 120ms ease,
+      background-color 120ms ease;
+  }
+
+  .press:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+  }
+
+  .press:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
 }
 
 @keyframes fadeInUp {
@@ -43,20 +201,6 @@ textarea {
   scrollbar-width: thin;
 }
 
-/* Visible focus for keyboard users on light and dark surfaces: indigo ring plus a white halo.
-   Kept in the base layer so utilities such as focus:outline-none can still override it. */
-@layer base {
-  :focus-visible {
-    outline: 3px solid #4338ca;
-    outline-offset: 3px;
-    box-shadow: 0 0 0 3px #fff;
-  }
-
-  [tabindex='-1']:focus-visible {
-    box-shadow: none;
-  }
-}
-
 /* Respect the operating-system setting to reduce motion. */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -69,5 +213,10 @@ textarea {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .press:hover:not(:disabled),
+  .press:active:not(:disabled) {
+    transform: none;
   }
 }

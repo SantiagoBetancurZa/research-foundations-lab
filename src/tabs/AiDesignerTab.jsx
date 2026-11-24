@@ -5,7 +5,6 @@ import {
   CheckSquare,
   ClipboardList,
   HelpCircle,
-  Info,
   Layers,
   Lightbulb,
   LineChart,
@@ -54,58 +53,55 @@ async function requestDesign(observation, lang) {
 
 function DesignReport({ design, badge, t }) {
   const methodItems = [
-    { key: 'question', label: t.question, icon: HelpCircle, color: 'text-blue-600' },
-    { key: 'hypothesis', label: t.hypothesis, icon: Lightbulb, color: 'text-yellow-600' },
-    { key: 'experiment', label: t.experiment, icon: TestTube, color: 'text-purple-600' },
-    { key: 'analysis', label: t.analysis, icon: LineChart, color: 'text-emerald-600' },
-    { key: 'conclusion', label: t.conclusion, icon: CheckSquare, color: 'text-red-600' },
-    { key: 'communication', label: t.communication, icon: Share2, color: 'text-indigo-600' },
-    { key: 'ethics', label: t.ethics, icon: Scale, color: 'text-teal-600' },
+    { key: 'question', label: t.question, icon: HelpCircle, color: 'text-primary-400' },
+    { key: 'hypothesis', label: t.hypothesis, icon: Lightbulb, color: 'text-ink-900' },
+    { key: 'experiment', label: t.experiment, icon: TestTube, color: 'text-primary-400' },
+    { key: 'analysis', label: t.analysis, icon: LineChart, color: 'text-primary-400' },
+    { key: 'conclusion', label: t.conclusion, icon: CheckSquare, color: 'text-ink-900' },
+    { key: 'communication', label: t.communication, icon: Share2, color: 'text-primary-400' },
+    { key: 'ethics', label: t.ethics, icon: Scale, color: 'text-primary-400' },
   ].filter((item) => design.method?.[item.key]);
   const concepts = design.concepts ?? {};
 
   return (
     <div className="animate-fade-in-up space-y-8 pb-10">
-      <p className="rounded-lg border border-indigo-100 bg-indigo-50 px-4 py-2 text-sm text-indigo-900">
+      <p className="rounded-card border border-primary-300/45 bg-primary-400/8 px-4 py-2 text-sm text-ink-900">
         {badge}
       </p>
 
-      <section className="rounded-2xl border-l-4 border-indigo-500 bg-white p-6 shadow-sm">
-        <h3 className="mb-2 flex items-center gap-2 text-lg font-bold text-gray-800">
-          <ClipboardList size={20} className="text-indigo-500" />
+      <section className="rounded-card border-l-4 border-primary-400 bg-white p-6 shadow-card-sm">
+        <h3 className="mb-2 flex items-center gap-2 text-lg font-semibold text-ink-900">
+          <ClipboardList size={20} className="text-primary-400" />
           {t.context}
         </h3>
-        <p className="leading-relaxed text-gray-700 italic">{design.summary}</p>
+        <p className="leading-relaxed text-gray-800 italic">{design.summary}</p>
       </section>
 
       <div>
-        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-gray-900">
-          <Layers size={24} className="text-indigo-600" /> {t.methodApplied}
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-ink-900">
+          <Layers size={24} className="text-primary-400" /> {t.methodApplied}
         </h3>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {methodItems.map((item) => (
             <div
               key={item.key}
-              className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-colors hover:border-indigo-200"
+              className="rounded-card border border-gray-100 bg-white p-4 shadow-card-sm transition-colors hover:border-primary-300/85"
             >
               <div className="mb-2 flex items-center gap-2">
                 <item.icon size={18} className={item.color} />
-                <span className="text-xs font-black uppercase tracking-widest text-gray-600">
+                <span className="text-xs font-semibold uppercase tracking-widest text-gray-800">
                   {item.label}
                 </span>
               </div>
-              <p className="text-sm text-gray-700">{design.method[item.key]}</p>
+              <p className="text-sm text-gray-800">{design.method[item.key]}</p>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="relative overflow-hidden rounded-3xl bg-gray-900 p-8 text-white shadow-2xl">
-        <div className="absolute right-0 top-0 p-8 opacity-10">
-          <Info size={120} />
-        </div>
-        <h3 className="relative z-10 mb-6 flex items-center gap-2 text-2xl font-bold">
-          <BookOpen size={28} className="text-indigo-400" /> {t.variablesTitle}
+      <div className="relative overflow-hidden rounded-card bg-primary-500 grid-lines p-8 text-white shadow-card-lg">
+        <h3 className="relative z-10 mb-6 flex items-center gap-2 text-2xl font-semibold">
+          <BookOpen size={28} className="text-white" /> {t.variablesTitle}
         </h3>
         <div className="relative z-10 grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="space-y-4">
@@ -190,14 +186,14 @@ export default function AiDesignerTab({ observation, caseId, onObservationChange
     <Panel>
       <div className="mx-auto max-w-4xl">
         <div className="animate-fade-in-up mb-8 text-center">
-          <Bot size={48} className="mx-auto mb-4 text-indigo-600" />
-          <h2 className="text-2xl font-bold text-gray-800">{t.title}</h2>
-          <p className="mt-2 text-gray-600">{t.intro}</p>
+          <Bot size={48} className="mx-auto mb-4 text-primary-400" />
+          <h2 className="text-2xl font-semibold text-ink-900">{t.title}</h2>
+          <p className="mt-2 text-gray-800">{t.intro}</p>
         </div>
 
         {available === false && (
-          <div role="status" className="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-950">
-            <p className="font-semibold">{t.unavailableTitle}</p>
+          <div role="status" className="mb-6 rounded-card border-2 border-dashed border-primary-300/85 bg-white p-4 text-ink-900">
+            <p className="font-medium">{t.unavailableTitle}</p>
             <p className="mt-1 text-sm">{t.unavailableText}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {content.cases.map((item) => (
@@ -206,10 +202,10 @@ export default function AiDesignerTab({ observation, caseId, onObservationChange
                   type="button"
                   onClick={() => showSample(item.id)}
                   aria-pressed={sampleCase?.id === item.id}
-                  className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors ${
+                  className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
                     sampleCase?.id === item.id
-                      ? 'border-amber-700 bg-amber-700 text-white'
-                      : 'border-amber-400 bg-white text-amber-950 hover:bg-amber-100'
+                      ? 'border-gray-800 bg-gray-800 text-white'
+                      : 'border-gray-800 bg-white text-ink-900 hover:bg-gray-100'
                   }`}
                 >
                   {item.title}
@@ -219,17 +215,17 @@ export default function AiDesignerTab({ observation, caseId, onObservationChange
           </div>
         )}
 
-        <div className="mb-8 rounded-xl border border-indigo-100 bg-indigo-50 p-6 shadow-inner">
-          <label htmlFor="ai-observation" className="mb-1 block font-semibold text-gray-800">
+        <div className="mb-8 rounded-card border border-primary-300/45 bg-primary-400/8 p-6 shadow-inner">
+          <label htmlFor="ai-observation" className="mb-1 block font-medium text-ink-900">
             {t.observationLabel}
           </label>
-          <p id="ai-observation-hint" className="mb-3 text-sm text-gray-600">
+          <p id="ai-observation-hint" className="mb-3 text-sm text-gray-800">
             {t.observationHint(MIN_CHARS, MAX_CHARS)}
           </p>
           <textarea
             id="ai-observation"
             aria-describedby="ai-observation-hint ai-observation-count"
-            className="w-full resize-y rounded-lg border border-gray-300 bg-white p-4 shadow-sm outline-none transition-all focus:ring-2 focus:ring-indigo-500"
+            className="w-full resize-y rounded-card border-2 border-primary-300/85 bg-white p-4 shadow-card-sm outline-none transition-all focus:ring-2 focus:ring-primary-400"
             rows="3"
             maxLength={MAX_CHARS}
             placeholder={t.placeholder}
@@ -240,11 +236,11 @@ export default function AiDesignerTab({ observation, caseId, onObservationChange
               onObservationChange(event.target.value);
             }}
           />
-          <p id="ai-observation-count" className="mt-1 text-right text-xs text-gray-600">
+          <p id="ai-observation-count" className="mt-1 text-right text-xs text-gray-800">
             {t.counter(observation.length, MAX_CHARS)}
           </p>
 
-          <p className="mt-3 text-sm font-medium text-gray-700">{t.startFromCase}</p>
+          <p className="mt-3 text-sm font-medium text-gray-800">{t.startFromCase}</p>
           <div className="mt-2 flex flex-wrap gap-2">
             {content.cases.map((item) => (
               <button
@@ -255,7 +251,7 @@ export default function AiDesignerTab({ observation, caseId, onObservationChange
                   setErrorCode('');
                   setResult(null);
                 }}
-                className="rounded-full border border-indigo-200 bg-white px-3 py-1.5 text-sm text-indigo-800 transition-colors hover:bg-indigo-100"
+                className="rounded-full border border-primary-300/85 bg-white px-3 py-1.5 text-sm text-primary-500 transition-colors hover:bg-primary-400/12"
               >
                 {item.title}
               </button>
@@ -266,7 +262,7 @@ export default function AiDesignerTab({ observation, caseId, onObservationChange
             onClick={handleGenerate}
             disabled={!canGenerate}
             type="button"
-            className="mt-5 flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 py-3 font-bold text-white shadow-md transition-colors hover:bg-indigo-700 disabled:bg-gray-400"
+            className="mt-5 flex w-full items-center justify-center gap-2 rounded-card bg-primary-400 py-3 font-semibold text-white shadow-card transition-colors hover:bg-primary-500 disabled:bg-gray-300"
           >
             {status === 'loading' ? t.generating : t.generate}
           </button>
@@ -277,7 +273,7 @@ export default function AiDesignerTab({ observation, caseId, onObservationChange
         </div>
 
         {errorMessage && (
-          <div role="alert" className="mb-6 rounded-lg bg-red-100 p-3 text-center text-red-800">
+          <div role="alert" className="mb-6 rounded-card bg-gray-100 p-3 text-center text-ink-900">
             {errorMessage}
           </div>
         )}

@@ -26,8 +26,8 @@ function YAxis({ ticks, y, left, right, label }) {
     <g>
       {ticks.map((tick) => (
         <g key={tick}>
-          <line x1={left} x2={right} y1={y(tick)} y2={y(tick)} className="stroke-slate-200" />
-          <text x={left - 6} y={y(tick) + 3.5} textAnchor="end" className="fill-slate-600 text-[10px]">
+          <line x1={left} x2={right} y1={y(tick)} y2={y(tick)} className="stroke-gray-100" />
+          <text x={left - 6} y={y(tick) + 3.5} textAnchor="end" className="fill-gray-800 text-[10px]">
             {tick}
           </text>
         </g>
@@ -36,7 +36,7 @@ function YAxis({ ticks, y, left, right, label }) {
         <text
           transform={`translate(11 ${(y(ticks[0]) + y(ticks[ticks.length - 1])) / 2}) rotate(-90)`}
           textAnchor="middle"
-          className="fill-slate-700 text-[10px] font-semibold"
+          className="fill-ink-900 text-[10px] font-medium"
         >
           {label}
         </text>
@@ -53,7 +53,7 @@ export function StripPlot({ groups, domain = [0, 100], yLabel, title, desc }) {
   const y = scale(domain, [height - margin.bottom, margin.top]);
   const plotWidth = width - margin.left - margin.right;
   const centers = groups.map((_, index) => margin.left + plotWidth * (index === 0 ? 0.28 : 0.72));
-  const colors = ['fill-slate-500', 'fill-indigo-600'];
+  const colors = ['fill-gray-800', 'fill-primary-400'];
 
   return (
     <Figure width={width} height={height} title={title} desc={desc}>
@@ -80,7 +80,7 @@ export function StripPlot({ groups, domain = [0, 100], yLabel, title, desc }) {
             x2={centers[index]}
             y1={y(group.ci[0])}
             y2={y(group.ci[1])}
-            className="stroke-slate-900"
+            className="stroke-ink-900"
             strokeWidth="2"
           />
           {[group.ci[0], group.ci[1]].map((value) => (
@@ -90,7 +90,7 @@ export function StripPlot({ groups, domain = [0, 100], yLabel, title, desc }) {
               x2={centers[index] + 8}
               y1={y(value)}
               y2={y(value)}
-              className="stroke-slate-900"
+              className="stroke-ink-900"
               strokeWidth="2"
             />
           ))}
@@ -99,14 +99,14 @@ export function StripPlot({ groups, domain = [0, 100], yLabel, title, desc }) {
             x2={centers[index] + 30}
             y1={y(group.mean)}
             y2={y(group.mean)}
-            className="stroke-slate-900"
+            className="stroke-ink-900"
             strokeWidth="3.5"
           />
           <text
             x={centers[index]}
             y={height - margin.bottom + 18}
             textAnchor="middle"
-            className="fill-slate-800 text-[10.5px] font-semibold"
+            className="fill-ink-900 text-[10.5px] font-medium"
           >
             {group.label}
           </text>
@@ -141,7 +141,7 @@ export function ScatterPlot({ x, y: values, slope, intercept, xDomain, yDomain, 
           x={sx(tick)}
           y={height - margin.bottom + 14}
           textAnchor="middle"
-          className="fill-slate-600 text-[10px]"
+          className="fill-gray-800 text-[10px]"
         >
           {tick}
         </text>
@@ -150,19 +150,19 @@ export function ScatterPlot({ x, y: values, slope, intercept, xDomain, yDomain, 
         x={(margin.left + width - margin.right) / 2}
         y={height - 8}
         textAnchor="middle"
-        className="fill-slate-700 text-[10px] font-semibold"
+        className="fill-ink-900 text-[10px] font-medium"
       >
         {xLabel}
       </text>
       {x.map((value, i) => (
-        <circle key={i} cx={sx(value)} cy={sy(values[i])} r="3.2" className="fill-indigo-600 opacity-55" />
+        <circle key={i} cx={sx(value)} cy={sy(values[i])} r="3.2" className="fill-primary-400 opacity-55" />
       ))}
       <line
         x1={sx(xDomain[0])}
         y1={sy(lineY(xDomain[0]))}
         x2={sx(xDomain[1])}
         y2={sy(lineY(xDomain[1]))}
-        className="stroke-rose-700"
+        className="stroke-ink-900"
         strokeWidth="2.5"
       />
     </Figure>
@@ -196,17 +196,17 @@ export function Histogram({ values, marker, bins = 18, title, desc, markerLabel 
           y={sy(count)}
           width={Math.max(0, sx(domain[0] + binWidth) - sx(domain[0]) - 2)}
           height={sy(0) - sy(count)}
-          className="fill-indigo-300"
+          className="fill-detail-400"
         />
       ))}
-      <line x1={sx(0)} x2={sx(0)} y1={margin.top - 6} y2={sy(0)} className="stroke-slate-500" strokeDasharray="3 3" />
-      <line x1={sx(marker)} x2={sx(marker)} y1={margin.top - 6} y2={sy(0)} className="stroke-emerald-700" strokeWidth="2.5" />
-      <text x={sx(marker)} y={margin.top - 9} textAnchor="middle" className="fill-emerald-800 text-[10px] font-semibold">
+      <line x1={sx(0)} x2={sx(0)} y1={margin.top - 6} y2={sy(0)} className="stroke-gray-800" strokeDasharray="3 3" />
+      <line x1={sx(marker)} x2={sx(marker)} y1={margin.top - 6} y2={sy(0)} className="stroke-ink-900" strokeWidth="2.5" />
+      <text x={sx(marker)} y={margin.top - 9} textAnchor="middle" className="fill-ink-900 text-[10px] font-medium">
         {markerLabel}
       </text>
-      <line x1={margin.left} x2={width - margin.right} y1={sy(0)} y2={sy(0)} className="stroke-slate-400" />
+      <line x1={margin.left} x2={width - margin.right} y1={sy(0)} y2={sy(0)} className="stroke-gray-300" />
       {[domain[0] + pad, 0, domain[1] - pad].map((tick, i) => (
-        <text key={i} x={sx(tick)} y={height - 12} textAnchor="middle" className="fill-slate-600 text-[10px]">
+        <text key={i} x={sx(tick)} y={height - 12} textAnchor="middle" className="fill-gray-800 text-[10px]">
           {format(tick)}
         </text>
       ))}
