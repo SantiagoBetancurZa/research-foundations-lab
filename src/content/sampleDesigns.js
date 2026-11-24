@@ -131,7 +131,141 @@ const en = {
   },
 };
 
-const SAMPLE_DESIGNS = { en };
+// Spanish versions (same keys as `en`).
+const es = {
+  'music-concentration': {
+    summary:
+      'Algunos estudiantes parecen concentrarse menos cuando leen textos académicos mientras escuchan música con letra. La observación sugiere que la letra podría competir con la lectura por la misma atención verbal, lo que reduciría la comprensión.',
+    method: {
+      question:
+        '¿Escuchar música con letra mientras se lee disminuye los puntajes en una prueba corta de comprensión lectora, en comparación con leer en silencio?',
+      hypothesis:
+        'Si los estudiantes leen con música con letra, su puntaje promedio de comprensión será menor que el de los estudiantes que leen en silencio.',
+      experiment:
+        'Asignar al azar a 48 estudiantes a dos grupos de 24. Ambos grupos leen el mismo texto de 800 palabras durante 15 minutos, en el mismo salón y horario; uno escucha canciones con letra a través de audífonos, a un volumen fijo, y el otro lleva audífonos en silencio. Luego, todos responden la misma prueba de comprensión de 10 ítems.',
+      analysis:
+        'Comparar el puntaje promedio y la desviación estándar de cada grupo, graficar los puntajes individuales y aplicar una prueba t para muestras independientes, junto con el tamaño del efecto (d de Cohen), a fin de valorar si la diferencia supera la variación esperable por azar.',
+      conclusion:
+        'Si el grupo con música obtiene puntajes claramente más bajos, la hipótesis queda respaldada para tareas de lectura breves; de lo contrario, no hay evidencia de un efecto en este contexto. En cualquier caso, el resultado se aplica a esta tarea y a esta población, no a cualquier situación de estudio.',
+      communication:
+        'Compartir un informe breve con un gráfico de puntos de los puntajes individuales, una tabla de medias y desviaciones estándar y el resultado de la prueba, seguido de recomendaciones prácticas sobre los ambientes de estudio.',
+      ethics:
+        'Solicitar el consentimiento informado, permitir que los estudiantes se retiren en cualquier momento, mantener el volumen en un nivel seguro y guardar los puntajes de forma anónima.',
+    },
+    concepts: {
+      independentVariable: 'Condición de lectura: música con letra vs. silencio.',
+      dependentVariable: 'Puntaje en la prueba de comprensión de 10 ítems (0–100).',
+      controlVariables: 'Mismo texto, tiempo límite, salón, horario, audífonos y volumen.',
+      controlGroup: 'Estudiantes que leen en silencio con los audífonos puestos.',
+      experimentalGroup: 'Estudiantes que leen mientras escuchan música con letra.',
+      possibleBias:
+        'Los estudiantes que suelen estudiar con música podrían verse menos afectados; el cansancio o el conocimiento previo del tema también podrían alterar los puntajes. La asignación aleatoria ayuda a equilibrar estos factores.',
+      correlation:
+        'Se espera una relación negativa: la presencia de letra iría acompañada de una menor comprensión, pero solo la comparación controlada puede mostrar una relación de causa y efecto.',
+    },
+  },
+  'ai-drafts': {
+    summary:
+      'Algunos estudiantes escriben primeros borradores más estructurados cuando un asistente de IA los ayuda a organizar sus ideas, pero no todos sienten que aprenden más. La observación combina un resultado medible (la calidad del borrador) con una percepción (el aprendizaje), por lo que se ajusta bien a un estudio de métodos mixtos.',
+    method: {
+      question:
+        '¿El uso de un asistente de IA durante la planeación mejora la estructura de un primer borrador académico, y cómo viven los estudiantes ese apoyo?',
+      hypothesis:
+        'Los borradores planeados con un asistente de IA obtendrán puntajes más altos en estructura y claridad, mientras que los estudiantes expresarán sentimientos encontrados sobre su propio aprendizaje y su autonomía.',
+      experiment:
+        'Dividir a 36 estudiantes en dos grupos equivalentes, con el mismo tema, la misma extensión y el mismo tiempo. Un grupo puede usar un asistente de IA solo para planear; el otro planea en papel. Dos docentes que no saben a qué grupo pertenece cada texto califican todos los borradores con la misma rúbrica, y 8 estudiantes de cada grupo participan en una entrevista breve.',
+      analysis:
+        'Comparar los puntajes promedio de la rúbrica con una prueba t y un tamaño del efecto; codificar las entrevistas en temas (rapidez, dependencia, confianza) y conectar ambos tipos de evidencia en una presentación conjunta (joint display).',
+      conclusion:
+        'El estudio puede mostrar si planear con IA mejora la estructura y cómo lo perciben los estudiantes. Un puntaje más alto no demostraría un aprendizaje más profundo, que debería medirse por separado.',
+      communication:
+        'Presentar un gráfico de los puntajes de la rúbrica junto a citas breves y anónimas, y cerrar con pautas para un uso responsable de la IA en los cursos de escritura.',
+      ethics:
+        'Explicar el propósito, obtener el consentimiento informado, dejar claro que las calificaciones no dependen del grupo y anonimizar los borradores y las transcripciones de las entrevistas.',
+    },
+    concepts: {
+      independentVariable: 'Uso de un asistente de IA durante la planeación (sí o no).',
+      dependentVariable:
+        'Puntaje de la rúbrica en estructura, claridad y coherencia, además del aprendizaje percibido que se describe en las entrevistas.',
+      controlVariables: 'Mismo tema, consigna, extensión, tiempo de escritura y rúbrica.',
+      controlGroup: 'Estudiantes que planean su borrador sin IA.',
+      experimentalGroup: 'Estudiantes que planean su borrador con un asistente de IA.',
+      possibleBias:
+        'La habilidad previa de escritura, la experiencia anterior con IA y que los evaluadores sepan de qué grupo proviene cada borrador. La calificación a ciegas y los grupos equilibrados reducen estos riesgos.',
+      correlation:
+        'El uso de IA puede ir de la mano con una mejor estructura, pero los estudiantes que ya son organizados podrían usar más la IA, por lo que la comparación debe estar controlada.',
+    },
+  },
+  'phone-sleep': {
+    summary:
+      'Los estudiantes que usan el celular hasta tarde en la noche dicen dormir peor y sentirse cansados en las clases de la mañana. Como un investigador no puede controlar éticamente las noches de los estudiantes, la observación apunta a un estudio descriptivo y correlacional.',
+    method: {
+      question:
+        '¿Existe relación entre los minutos que los estudiantes pasan en el celular antes de dormir y la calidad de sueño que ellos mismos reportan?',
+      hypothesis:
+        'Los estudiantes que pasan más tiempo en el celular durante la hora previa a dormir reportarán una menor calidad de sueño.',
+      experiment:
+        'Encuestar durante una semana a 64 estudiantes de la misma cohorte. Cada mañana registran los minutos de uso del celular antes de dormir (idealmente, a partir del reporte de tiempo de pantalla del propio celular) y califican la calidad de su sueño en una escala de 0 a 10.',
+      analysis:
+        'Elaborar un diagrama de dispersión, calcular el coeficiente de correlación de Pearson (r) con su intervalo de confianza y comparar la proporción de estudiantes con sueño regular o malo entre quienes usan mucho y poco el celular en la noche.',
+      conclusion:
+        'Una correlación negativa mostraría que más tiempo de pantalla va de la mano con un peor sueño, pero no demostraría que el celular sea la causa: el estrés, la carga académica o la cafeína podrían explicar ambas cosas.',
+      communication:
+        'Publicar un diagrama de dispersión con la línea de tendencia, una tabla de frecuencias y una advertencia clara de que correlación no implica causalidad, además de consejos de higiene del sueño.',
+      ethics:
+        'Usar respuestas anónimas, pedir solo los datos necesarios y compartir recursos sobre la salud del sueño con todos los participantes.',
+    },
+    concepts: {
+      independentVariable: 'Minutos de uso del celular antes de dormir (observados, no manipulados).',
+      dependentVariable: 'Calidad de sueño autorreportada (escala de 0 a 10).',
+      controlVariables:
+        'Misma cohorte, misma semana, misma encuesta y el mismo momento del día para responder.',
+      controlGroup:
+        'No hay grupo de control; quienes usan poco el celular sirven como punto de comparación.',
+      experimentalGroup:
+        'No hay grupo experimental, porque el estudio solo observa hábitos ya existentes.',
+      possibleBias:
+        'Errores de memoria, subregistro del tiempo de pantalla y otros hábitos que afectan el sueño (estrés, cafeína, carga académica).',
+      correlation:
+        'Se espera una correlación negativa moderada: a medida que aumentan los minutos de uso del celular, la calidad del sueño tiende a disminuir.',
+    },
+  },
+  'online-forums': {
+    summary:
+      'En los cursos virtuales, algunos estudiantes consideran muy útiles los foros, mientras que otros participan poco porque no ven un beneficio claro. Comprender estas experiencias requiere un estudio cualitativo que escuche cómo los estudiantes describen los foros.',
+    method: {
+      question:
+        '¿Cómo describen los estudiantes con distintos niveles de participación el aporte de los foros virtuales a su aprendizaje?',
+      hypothesis:
+        'Los estudios cualitativos suelen trabajar con supuestos orientadores en lugar de hipótesis comprobables: se espera que los estudiantes valoren los foros cuando la interacción les resulta segura y significativa.',
+      experiment:
+        'Seleccionar a 16 estudiantes del mismo curso con participación alta, media y baja. Realizar entrevistas semiestructuradas y un grupo focal con las mismas preguntas guía, y revisar sus registros de participación.',
+      analysis:
+        'Transcribir las conversaciones, codificarlas línea por línea, agrupar los códigos en temas (claridad, aprendizaje social, barreras) y comparar los temas de los estudiantes activos con los de quienes solo leen.',
+      conclusion:
+        'Los resultados describen qué hace valioso un foro para estos estudiantes; no pretenden generalizarse estadísticamente, pero pueden orientar un mejor diseño de los foros.',
+      communication:
+        'Redactar un informe organizado por temas, con citas anónimas, e incluir recomendaciones prácticas para los docentes que moderan foros.',
+      ethics:
+        'Obtener el consentimiento informado para grabar, usar seudónimos y garantizar que participar no tenga ningún efecto en las calificaciones.',
+    },
+    concepts: {
+      independentVariable:
+        'No se manipula; el estudio compara perfiles de participación observados (estudiantes activos vs. quienes solo leen).',
+      dependentVariable:
+        'Cómo describen los estudiantes su aprendizaje, la utilidad del foro y su sentido de comunidad.',
+      controlVariables: 'Mismo curso, cohorte, periodo y guion de entrevista para todos.',
+      controlGroup: 'No hay grupo de control; los perfiles se comparan entre sí.',
+      experimentalGroup: 'No hay grupo experimental; el estudio explora experiencias.',
+      possibleBias:
+        'La deseabilidad social (decir lo que el docente quiere oír) y las propias expectativas del investigador durante la codificación. Un segundo codificador y un registro de auditoría (audit trail) ayudan a reducir estos sesgos.',
+      correlation:
+        'No es el objetivo: el estudio busca significados y patrones, no relaciones numéricas.',
+    },
+  },
+};
+
+const SAMPLE_DESIGNS = { en, es };
 
 export function getSampleDesign(lang, caseId) {
   return (SAMPLE_DESIGNS[lang] ?? SAMPLE_DESIGNS.en)[caseId] ?? SAMPLE_DESIGNS.en[caseId] ?? null;

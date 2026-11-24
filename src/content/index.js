@@ -8,8 +8,9 @@ import {
   ARTICLE_SECTIONS,
 } from './structure.js';
 import en from './en.js';
+import es from './es.js';
 
-const TEXT = { en };
+const TEXT = { en, es };
 
 const merge = (items, texts) => items.map((item) => ({ ...item, ...texts[item.id] }));
 

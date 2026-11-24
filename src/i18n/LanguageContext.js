@@ -1,7 +1,10 @@
 import { createContext, useContext } from 'react';
 
-export const SUPPORTED_LANGUAGES = ['en'];
+export const SUPPORTED_LANGUAGES = ['en', 'es'];
 export const DEFAULT_LANGUAGE = 'en';
+
+// Each language is named in its own language, so the switcher reads correctly in both.
+export const LANGUAGE_NAMES = { en: 'English', es: 'Español' };
 
 export const LanguageContext = createContext(null);
 

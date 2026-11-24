@@ -1,8 +1,10 @@
 // Interface text. Course content lives in src/content.
 const en = {
+  appEyebrow: 'Interactive course · 8 modules',
   appTitle: 'Research Foundations Lab',
   appTagline: 'Explore science with Artificial Intelligence.',
   skipToContent: 'Skip to main content',
+  languageLabel: 'Language',
   tabsLabel: 'Course sections',
   common: {
     cardHint: 'Show / hide definition',
@@ -234,4 +236,245 @@ const en = {
   },
 };
 
-export const STRINGS = { en };
+const es = {
+  appEyebrow: 'Curso interactivo · 8 módulos',
+  appTitle: 'Laboratorio de Fundamentos de la Investigación',
+  appTagline: 'Explora la ciencia con inteligencia artificial.',
+  skipToContent: 'Saltar al contenido principal',
+  languageLabel: 'Idioma',
+  tabsLabel: 'Secciones del curso',
+  common: {
+    cardHint: 'Mostrar / ocultar definición',
+    revealAll: 'Mostrar todas las definiciones',
+    hideAll: 'Ocultar todas las definiciones',
+  },
+  tabs: {
+    method: 'El Método',
+    researchTypes: 'Tipos de Investigación',
+    instruments: 'Instrumentos',
+    concepts: 'Conceptos',
+    cases: 'Casos',
+    article: 'Artículo',
+    simulator: 'Simulador',
+    ai: 'Diseñador IA',
+  },
+  footer: {
+    credit:
+      'Herramienta educativa diseñada por el profesor Santiago Betancur Zapata para fomentar el pensamiento crítico y experimental.',
+    visit: 'Visita:',
+  },
+  method: {
+    title: 'El Proceso Científico',
+    intro:
+      'Toca cualquier tarjeta para revelar su definición. La secuencia incluye los pasos metodológicos entre la primera idea y la ejecución del estudio.',
+  },
+  concepts: {
+    title: 'El Glosario del Investigador',
+    intro: 'Toca cualquier tarjeta para revelar su significado.',
+  },
+  researchTypes: {
+    title: 'Tipos y Enfoques de Investigación',
+    intro: 'Descubre los distintos caminos para abordar un problema de investigación.',
+  },
+  instruments: {
+    title: 'Instrumentos de Recolección de Datos',
+    intro: 'Las herramientas prácticas que usan los científicos para recolectar datos de la realidad.',
+  },
+  cases: {
+    title: 'Casos de Investigación',
+    intro:
+      'Usa estos escenarios como punto de partida para practicar preguntas, variables, instrumentos y decisiones metodológicas.',
+    level: (level) => `Nivel: ${level}`,
+    scenario: 'Situación',
+    question: 'Pregunta de investigación',
+    design: 'Diseño sugerido',
+    analysis: 'Posible análisis',
+    variablesTitle: 'Variables y recolección de datos',
+    independent: 'Variable independiente',
+    dependent: 'Variable dependiente',
+    control: 'Variables de control',
+    instruments: 'Instrumentos sugeridos',
+    bias: 'Posible sesgo o limitación',
+    seed: 'Observación inicial sugerida',
+    useInAi: 'Llevar este caso al Diseñador IA',
+  },
+  article: {
+    title: 'Estructura Clásica de un Artículo Científico',
+    intro:
+      'Este es el recorrido tradicional de la escritura académica: cada sección cumple una función distinta, y todas juntas convierten un estudio en un texto que puede publicarse y evaluarse.',
+    sequence: 'Secuencia sugerida',
+    section: (n) => `Sección ${n}`,
+    includes: 'Qué debe incluir',
+  },
+  simulator: {
+    title: 'Simulador Metodológico',
+    intro:
+      'Elige un caso del curso, toma las decisiones de diseño y ejecuta el estudio. Cada ejecución extrae una nueva muestra aleatoria para que veas cómo varían los resultados, y las estadísticas se calculan de verdad.',
+    phases: ['Caso', 'Diseño', 'Ejecución', 'Hallazgos'],
+    progress: 'Progreso del simulador',
+    selectedCase: 'Caso seleccionado',
+    buildDesign: 'Construir el diseño metodológico',
+    designTitle: 'Diseño metodológico',
+    objective: 'Objetivo',
+    sample: 'Muestra',
+    procedure: 'Procedimiento',
+    designDecisions: 'Tus decisiones de diseño',
+    sampleSizeLabel: 'Tamaño de la muestra',
+    sampleSizeHelp: 'Las muestras más grandes dan estimaciones más precisas, pero exigen más tiempo y esfuerzo.',
+    perGroup: (n) => `${n} por grupo (${n * 2} participantes)`,
+    participants: (n) => `${n} participantes`,
+    effectLabel: 'Efecto real en la población',
+    effectHelp:
+      'En la investigación real nadie conoce este valor. Aquí lo eliges tú, para que veas lo que las muestras pueden y no pueden revelar.',
+    effects: { none: 'Ninguno', small: 'Pequeño', medium: 'Mediano', large: 'Grande' },
+    effectD: (d) => `d de Cohen = ${d}`,
+    effectRho: (rho) => `ρ = ${rho}`,
+    qualitativeSample:
+      'Las muestras cualitativas son pequeñas y se eligen a propósito (muestreo intencional): se busca profundidad y variedad de experiencias, no generalización estadística.',
+    designSummary: (sample, effect) => `Muestra: ${sample}. Efecto real: ${effect.toLowerCase()}.`,
+    varsTitle: 'Variables, instrumentos y sesgos',
+    independent: 'Variable independiente',
+    dependent: 'Variable dependiente',
+    control: 'Variables de control',
+    instruments: 'Instrumentos',
+    bias: 'Sesgo o limitación',
+    changeCase: 'Cambiar de caso',
+    toExecution: 'Ir a la ejecución',
+    studyQuestion: 'Pregunta del estudio',
+    run: 'Ejecutar simulación',
+    running: 'Extrayendo la muestra y calculando las estadísticas…',
+    findings: 'Hallazgos simulados',
+    sampleNumber: (seed) => `Muestra n.º ${seed}`,
+    newSample: 'Extraer una nueva muestra',
+    table: { caption: 'Estadísticos descriptivos por grupo', group: 'Grupo', mean: 'Media', sd: 'DE', ci: 'IC 95 %' },
+    // Masculine forms: they agree with "efecto" / "tamaño del efecto".
+    // insightCorrelation switches them to the feminine for "correlación".
+    sizes: {
+      negligible: 'despreciable',
+      small: 'pequeño',
+      medium: 'mediano',
+      large: 'grande',
+      moderate: 'moderado',
+      strong: 'fuerte',
+    },
+    charts: {
+      strip: 'Puntajes individuales con medias de grupo e intervalos de confianza del 95 %',
+      stripDesc: (labels, controlMean, treatmentMean) =>
+        `${labels[0]}: media ${controlMean}. ${labels[1]}: media ${treatmentMean}.`,
+      stripCaption:
+        'Cada punto es un estudiante. La línea gruesa es la media del grupo; la barra vertical es su intervalo de confianza del 95 %.',
+      scatter: 'Uso del celular antes de dormir y calidad del sueño',
+      scatterDesc: (n, r) => `${n} estudiantes; r de Pearson = ${r}.`,
+      scatterCaption: 'Cada punto es un estudiante. La línea roja es la recta de tendencia por mínimos cuadrados.',
+    },
+    results: {
+      difference: (diff, low, high) =>
+        `Diferencia de medias (segundo grupo − control): ${diff} puntos; IC 95 % [${low}; ${high}].`,
+      welch: (t, df, p) => `Prueba t de Welch: t(${df}) = ${t}, p ${p}.`,
+      cohen: (d, size) => `Tamaño del efecto: d de Cohen = ${d} (${size}).`,
+      correlation: (r, low, high) => `r de Pearson = ${r}; IC 95 % [${low}; ${high}].`,
+      correlationTest: (t, df, p) => `t(${df}) = ${t}, p ${p}.`,
+      rSquared: (r2, percent) =>
+        `r² = ${r2}: el tiempo de uso del celular explica cerca del ${percent} de las diferencias en la calidad del sueño en esta muestra.`,
+      significant:
+        'p < ,05: estadísticamente significativo. Si no hubiera un efecto real, un resultado tan extremo sería poco común.',
+      notSignificant:
+        'p ≥ ,05: no es estadísticamente significativo. La variación muestral por sí sola podría producir fácilmente un resultado así, por lo que esta muestra no permite confirmar la hipótesis.',
+      correlationWarning:
+        'Recuerda: una correlación muestra que dos variables se mueven juntas, no que una sea la causa de la otra.',
+      insightTwoGroups: ({ treatment, control, diff, higher, d, size, significant }) =>
+        `El grupo “${treatment}” obtuvo en promedio ${diff} puntos ${higher ? 'más' : 'menos'} que el grupo “${control}” (d = ${d}, un efecto ${size}). ${
+          significant
+            ? 'La diferencia es estadísticamente significativa en esta muestra.'
+            : 'La diferencia no es estadísticamente significativa en esta muestra: extrae nuevas muestras o repite el estudio para ver cuánto cambia.'
+        }`,
+      // `strength` arrives in the masculine (see `sizes`); -o → -a makes it agree with "correlación".
+      insightCorrelation: ({ r, strength, negative, significant }) =>
+        `La correlación es ${negative ? 'negativa' : 'positiva'} y ${String(strength).replace(/o$/, 'a')} (r = ${r}): ${
+          negative
+            ? 'los estudiantes que usan el celular por más tiempo tienden a reportar peor sueño.'
+            : 'los estudiantes que usan el celular por más tiempo tienden a reportar mejor sueño.'
+        } ${significant ? 'Es estadísticamente significativa en esta muestra.' : 'No es estadísticamente significativa en esta muestra.'}`,
+    },
+    replication: {
+      title: '¿Y si 100 equipos de investigación hicieran este mismo estudio?',
+      intro:
+        'Cada equipo extrae su propia muestra de la misma población. Repetir el estudio muestra cuánto pueden variar los resultados por azar.',
+      summary: (k, runs, percent) =>
+        `${k} de ${runs} estudios (${percent}) ${Number(k) === 1 ? 'obtuvo' : 'obtuvieron'} p < ,05.`,
+      power:
+        'Esta proporción es la potencia estadística de tu diseño: la probabilidad de detectar el efecto cuando existe. Regresa, aumenta el tamaño de la muestra y observa cómo crece.',
+      falsePositives:
+        'Aquí no hay un efecto real y, aun así, cerca del 5 % de los estudios alcanzan p < ,05 por azar: son falsos positivos. Por eso importa la réplica.',
+      histDiff: 'Diferencias de medias halladas en los 100 estudios',
+      histR: 'Correlaciones halladas en los 100 estudios',
+      histDesc: (min, max, truth) => `Las estimaciones van de ${min} a ${max}; el valor real es ${truth}.`,
+      markerLabel: 'valor real',
+    },
+    matrix: {
+      caption: 'Participantes que mencionaron cada tema',
+      theme: 'Tema',
+      of: (count, n) => `${count} de ${n}`,
+    },
+    reading: 'Lectura metodológica',
+    keyInsight: 'Idea clave',
+    discussion: 'Posible discusión',
+    closing: 'Cierre del estudio',
+    limitation: 'Limitación',
+    communication: 'Comunicación',
+    adjustDesign: 'Ajustar el diseño',
+    toAi: 'Llevarlo al Diseñador IA',
+    reset: 'Reiniciar simulador',
+    replicate: 'Repetir este estudio 100 veces',
+  },
+  ai: {
+    title: 'Diseñador Experimental con IA',
+    intro: 'Convierte cualquier pregunta cotidiana en un estudio científico formal.',
+    observationLabel: 'Tu observación',
+    observationHint: (min, max) =>
+      `Describe algo que hayas notado en la vida cotidiana (de ${min} a ${max} caracteres).`,
+    placeholder:
+      'Ej.: He notado que las hormigas ignoran las migas de pan integral, pero van directo a las de pan blanco…',
+    counter: (count, max) => `${count} / ${max} caracteres`,
+    startFromCase: 'O empieza desde uno de los casos del curso:',
+    generate: 'Generar un Informe Científico Completo',
+    generating: 'Aplicando el método científico…',
+    unavailableTitle: 'El diseñador con IA en vivo no está activado en esta copia de la aplicación.',
+    unavailableText: 'Aun así, puedes explorar un diseño de ejemplo preparado con anticipación para cada caso del curso:',
+    sampleBadge: (title) => `Diseño de ejemplo preparado con anticipación para el caso “${title}”.`,
+    aiBadge: 'Generado en vivo por IA. Léelo con sentido crítico: es un punto de partida, no una respuesta definitiva.',
+    errors: {
+      invalid_length: (min, max) => `Escribe entre ${min} y ${max} caracteres.`,
+      rate_limited: 'Demasiadas solicitudes en poco tiempo. Espera un minuto e inténtalo de nuevo.',
+      upstream_busy: 'El servicio de IA está ocupado ahora mismo. Vuelve a intentarlo en unos instantes.',
+      blocked:
+        'La IA no pudo diseñar un estudio para esta observación. Intenta describir una situación cotidiana y segura.',
+      timeout: 'La IA tardó demasiado en responder. Inténtalo de nuevo.',
+      generic: 'No fue posible conectar con el laboratorio de IA. Inténtalo de nuevo más tarde.',
+    },
+    context: 'Contexto de la Investigación',
+    methodApplied: 'El Método Aplicado',
+    question: 'Pregunta',
+    hypothesis: 'Hipótesis',
+    experiment: 'Experimento',
+    analysis: 'Análisis',
+    conclusion: 'Conclusión',
+    communication: 'Comunicación',
+    ethics: 'Ética',
+    variablesTitle: 'Variables y Conceptos',
+    independent: 'Variable Independiente',
+    independentSub: 'La causa',
+    dependent: 'Variable Dependiente',
+    dependentSub: 'El efecto',
+    control: 'Variables de Control',
+    controlSub: 'Lo que se mantiene constante',
+    groups: 'Grupos (control vs. experimental)',
+    groupsSub: 'Comparación',
+    bias: 'Posible Sesgo',
+    biasSub: 'Riesgo de error',
+    correlation: 'Correlación Sugerida',
+    correlationSub: 'Patrón observado',
+  },
+};
+
+export const STRINGS = { en, es };
