@@ -1,0 +1,25 @@
+# Dependencies and builds
+node_modules
+dist
+dist-ssr
+*.local
+
+# Secrets: never commit environment files
+.env
+.env*
+!.env.example
+
+# Vercel
+.vercel
+
+# macOS / exFAT metadata
+.DS_Store
+._*
+
+# Logs and editors
+logs
+*.log
+npm-debug.log*
+.vscode/*
+!.vscode/extensions.json
+.idea
