@@ -26,7 +26,7 @@ use with a keyboard or a screen reader.
 | **Cases** | Four classroom studies (music and concentration, AI and first drafts, phone use and sleep, online forums) with question, variables and design. |
 | **Article** | The structure of a scientific article, section by section. |
 | **Simulator** | Pick a case, choose the **sample size** and the **true effect** in the population, and run the study. Each run draws a new seeded random sample; the lab computes the statistics, plots every participant, and can **repeat the study 100 times** to show statistical power, or the ~5 % false positives when there is no real effect. |
-| **AI Designer** | Describe something noticed in daily life; the AI returns a complete design: question, hypothesis, variables, groups, possible bias, ethics and how to communicate it. Prepared examples keep it usable when the AI service is not configured. |
+| **AI Designer** | Describe something noticed in daily life; Claude Sonnet 5.5 returns a complete design: question, hypothesis, variables, groups, possible bias, ethics and how to communicate it. Prepared examples keep it usable when the AI service is not configured. |
 
 ## What was built during GSIC 2026 (and what already existed)
 
@@ -52,6 +52,7 @@ and some text colours were below WCAG AA contrast.
 | [`27ffeb2`](https://github.com/SantiagoBetancurZa/research-foundations-lab/commit/27ffeb2) | Simulator with real statistics: seeded samples, Welch's t-test, Cohen's d, Pearson's r, power by replication, accessible charts. |
 | [`f476d89`](https://github.com/SantiagoBetancurZa/research-foundations-lab/commit/f476d89) | Full Spanish version with correct accents; remembered language choice. |
 | [`c5fbd81`](https://github.com/SantiagoBetancurZa/research-foundations-lab/commit/c5fbd81) | Redesign with the visual system of my YouTube channel, [Gamification Lab](https://www.youtube.com/channel/UCQgyEpxKxBeUFWWmEvSPk1A); English / Español switcher. |
+| [`bf5c0ad`](https://github.com/SantiagoBetancurZa/research-foundations-lab/commit/bf5c0ad) | AI Designer moved to Claude Sonnet 5.5 (official SDK) with spend and abuse limits: fixed model, capped output, same-origin requests only, per-IP and global limits. |
 
 Development during the competition was assisted by Claude Code (Anthropic), credited as co-author
 on those commits.
@@ -94,15 +95,23 @@ detail blue, ink and neutrals).
 
 ## Security and privacy
 
-- The Gemini key exists only on the server (`GEMINI_API_KEY`); no key reaches the browser bundle.
-- `/api/design` accepts JSON only, limits the body to 4 KB and the text to 15–1,200 characters,
-  strips control characters, rate-limits each IP (8 requests per minute, best effort), times out
-  after 25 s, falls back to a second model and returns friendly error codes.
-- The model must answer with a fixed JSON schema; the observation is treated as data, not as
-  instructions.
+- The AI Designer calls **Claude Sonnet 5.5** (Anthropic) through the official SDK, from a Vercel
+  Function. The key exists only on the server (`ANTHROPIC_API_KEY`); no key reaches the browser
+  bundle.
+- The key belongs to an Anthropic workspace used only by this app, with its own monthly spend
+  limit, so the cost can never go beyond that limit.
+- The model is fixed in code: no environment variable, request field or fallback can change it.
+  Every request has fixed ceilings: 3,000 output tokens, low effort with no extended thinking,
+  25 s timeout and no retries.
+- `/api/design` only answers the app's own pages (same-origin check), accepts JSON only, limits the
+  body to 4 KB and the text to 15–1,200 characters, strips control characters and rate-limits each
+  IP (4 requests per minute and 20 per day) and all traffic (30 per minute). These limits are best
+  effort, per server instance; the spend limit is the hard ceiling.
+- The model must answer with a fixed JSON schema (structured output); the observation is treated
+  as data, not as instructions. Errors are returned as short codes; API messages are never logged.
 - No accounts, cookies or analytics. The only thing stored is the language choice, in the
   browser. The font is self-hosted, so no third-party font server is contacted. The observation is
-  sent to Google's Gemini API only when the student presses **Generate**.
+  sent to the Claude API only when the student presses **Generate**.
 
 ## Run it locally
 
@@ -116,19 +125,20 @@ npm run lint
 npm run build
 ```
 
-To try the live AI Designer locally, copy `.env.example` to `.env.local`, add a Gemini API key and
-run `vercel dev`. Never use the `VITE_` prefix for the key: Vite would publish it.
+To try the live AI Designer locally, copy `.env.example` to `.env.local`, add an Anthropic API key
+and run `vercel dev`. Never use the `VITE_` prefix for the key: Vite would publish it.
 
 ## Deploy
 
-Import the repository in Vercel (framework: Vite) and add `GEMINI_API_KEY` under
-**Settings → Environment Variables**. `GEMINI_MODEL` is optional.
+Import the repository in Vercel (framework: Vite) and add `ANTHROPIC_API_KEY` under
+**Settings → Environment Variables**. Create that key in an Anthropic workspace with a monthly
+spend limit.
 
 ## Project structure
 
 ```
 api/design.js           Vercel Function: POST /api/design (GET reports availability)
-api/_lib/design.js      validation, prompt, schema, model fallback, rate limiter
+api/_lib/design.js      validation, prompt, schema, Claude call, error codes, rate limiter
 src/content/            course content: structure.js (ids, icons) + en.js / es.js (text)
 src/i18n/               interface strings and the language provider
 src/lib/stats.js        statistics
@@ -141,7 +151,7 @@ tests/                  node:test suites
 ## Built with
 
 React 19, Vite 8, Tailwind CSS 4, lucide-react icons, Inclusive Sans (Fontsource, SIL OFL),
-Vercel Functions and the Google Gemini API.
+Vercel Functions and the Claude API (Anthropic SDK, Claude Sonnet 5.5).
 
 ## License
 
