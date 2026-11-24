@@ -205,6 +205,7 @@ const en = {
     errors: {
       invalid_length: (min, max) => `Please write between ${min} and ${max} characters.`,
       rate_limited: 'Too many requests in a short time. Please wait a minute and try again.',
+      daily_limit: 'You have reached today’s limit of live AI designs. Please try again tomorrow.',
       upstream_busy: 'The AI service is busy right now. Please try again in a moment.',
       blocked:
         'The AI could not design a study for this observation. Try describing a safe, everyday situation.',
@@ -446,6 +447,7 @@ const es = {
     errors: {
       invalid_length: (min, max) => `Escribe entre ${min} y ${max} caracteres.`,
       rate_limited: 'Demasiadas solicitudes en poco tiempo. Espera un minuto e inténtalo de nuevo.',
+      daily_limit: 'Llegaste al límite de diseños con IA en vivo de hoy. Vuelve a intentarlo mañana.',
       upstream_busy: 'El servicio de IA está ocupado ahora mismo. Vuelve a intentarlo en unos instantes.',
       blocked:
         'La IA no pudo diseñar un estudio para esta observación. Intenta describir una situación cotidiana y segura.',
