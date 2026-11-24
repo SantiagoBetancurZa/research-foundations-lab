@@ -48,31 +48,31 @@ export const RESEARCH_TYPES = [
     id: 'quantitative',
     icon: Calculator,
     color: 'bg-blue-100 border-blue-400',
-    back: 'bg-blue-600 border-blue-700',
+    back: 'bg-blue-700 border-blue-800',
   },
   {
     id: 'qualitative',
     icon: MessageCircle,
     color: 'bg-rose-100 border-rose-400',
-    back: 'bg-rose-600 border-rose-700',
+    back: 'bg-rose-700 border-rose-800',
   },
   {
     id: 'mixed',
     icon: GitMerge,
     color: 'bg-purple-100 border-purple-400',
-    back: 'bg-purple-600 border-purple-700',
+    back: 'bg-purple-700 border-purple-800',
   },
   {
     id: 'experimental',
     icon: Target,
     color: 'bg-emerald-100 border-emerald-400',
-    back: 'bg-emerald-600 border-emerald-700',
+    back: 'bg-emerald-700 border-emerald-800',
   },
   {
     id: 'descriptive',
     icon: Eye,
     color: 'bg-amber-100 border-amber-400',
-    back: 'bg-amber-600 border-amber-700',
+    back: 'bg-amber-700 border-amber-800',
   },
 ];
 

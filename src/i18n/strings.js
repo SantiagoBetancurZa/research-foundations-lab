@@ -2,6 +2,13 @@
 const en = {
   appTitle: 'Research Foundations Lab',
   appTagline: 'Explore science with Artificial Intelligence.',
+  skipToContent: 'Skip to main content',
+  tabsLabel: 'Course sections',
+  common: {
+    cardHint: 'Show / hide definition',
+    revealAll: 'Show all definitions',
+    hideAll: 'Hide all definitions',
+  },
   tabs: {
     method: 'The Method',
     researchTypes: 'Research Types',
@@ -65,6 +72,7 @@ const en = {
     intro:
       'The simulator works with the same cases, variables, approaches and instruments used in the rest of the course.',
     phases: ['Case', 'Design', 'Execution', 'Findings'],
+    progress: 'Simulator progress',
     selectedCase: 'Selected case',
     buildDesign: 'Build the methodological design',
     designTitle: 'Methodological design',

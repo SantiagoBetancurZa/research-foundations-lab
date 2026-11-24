@@ -15,7 +15,7 @@ export default function CasesTab({ onUseCase }) {
     <Panel>
       <div className="mb-8 text-center">
         <h2 className="mb-2 text-2xl font-bold text-gray-800">{t.title}</h2>
-        <p className="mx-auto max-w-3xl text-gray-500">{t.intro}</p>
+        <p className="mx-auto max-w-3xl text-gray-600">{t.intro}</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[320px_1fr]">
@@ -25,6 +25,7 @@ export default function CasesTab({ onUseCase }) {
               key={researchCase.id}
               type="button"
               onClick={() => setSelectedCaseId(researchCase.id)}
+              aria-pressed={researchCase.id === selectedCaseId}
               className={`w-full rounded-2xl border p-4 text-left transition-all ${
                 researchCase.id === selectedCaseId
                   ? 'border-indigo-300 bg-indigo-50 shadow-md shadow-indigo-100'

@@ -9,7 +9,7 @@ import {
   Target,
   TestTube,
 } from 'lucide-react';
-import TabButton from './components/TabButton.jsx';
+import TabList from './components/TabList.jsx';
 import { useLanguage } from './i18n/LanguageContext.js';
 import { ConceptsTab, InstrumentsTab, MethodTab, ResearchTypesTab } from './tabs/CardTabs.jsx';
 import CasesTab from './tabs/CasesTab.jsx';
@@ -45,11 +45,35 @@ export default function App() {
     setActiveTab('ai');
   };
 
+  const panels = {
+    method: <MethodTab />,
+    researchTypes: <ResearchTypesTab />,
+    instruments: <InstrumentsTab />,
+    concepts: <ConceptsTab />,
+    cases: <CasesTab onUseCase={openCaseInAiDesigner} />,
+    article: <ArticleTab />,
+    simulator: <SimulatorTab onUseCase={openCaseInAiDesigner} />,
+    ai: (
+      <AiDesignerTab
+        observation={aiObservation}
+        caseId={aiCaseId}
+        onObservationChange={setAiObservation}
+        onCaseSelect={selectAiCase}
+      />
+    ),
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-4 font-sans md:p-8">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:font-semibold focus:text-indigo-800 focus:shadow-lg"
+      >
+        {ui.skipToContent}
+      </a>
       <div className="mx-auto max-w-6xl">
         <header className="mb-8 flex flex-col items-center gap-4 text-center md:flex-row md:text-left">
-          <div className="animate-pulse rounded-2xl bg-indigo-600 p-4 text-white shadow-lg">
+          <div className="rounded-2xl bg-indigo-600 p-4 text-white shadow-lg">
             <FlaskConical size={40} />
           </div>
           <div>
@@ -60,37 +84,25 @@ export default function App() {
           </div>
         </header>
 
-        <div className="hide-scrollbar flex overflow-x-auto border-b border-gray-200">
-          {TABS.map((tab) => (
-            <TabButton
-              key={tab.id}
-              active={activeTab === tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              icon={tab.icon}
-              label={ui.tabs[tab.id]}
-            />
-          ))}
-        </div>
+        <main id="main" tabIndex={-1} className="focus:outline-none">
+          <TabList
+            label={ui.tabsLabel}
+            tabs={TABS.map((tab) => ({ ...tab, label: ui.tabs[tab.id] }))}
+            activeId={activeTab}
+            onChange={setActiveTab}
+          />
+          <div
+            role="tabpanel"
+            id={`panel-${activeTab}`}
+            aria-labelledby={`tab-${activeTab}`}
+            tabIndex={0}
+            className="overflow-hidden rounded-b-xl rounded-tr-xl shadow-xl"
+          >
+            {panels[activeTab]}
+          </div>
+        </main>
 
-        <div className="overflow-hidden rounded-b-xl rounded-tr-xl shadow-xl">
-          {activeTab === 'method' && <MethodTab />}
-          {activeTab === 'researchTypes' && <ResearchTypesTab />}
-          {activeTab === 'instruments' && <InstrumentsTab />}
-          {activeTab === 'concepts' && <ConceptsTab />}
-          {activeTab === 'cases' && <CasesTab onUseCase={openCaseInAiDesigner} />}
-          {activeTab === 'article' && <ArticleTab />}
-          {activeTab === 'simulator' && <SimulatorTab onUseCase={openCaseInAiDesigner} />}
-          {activeTab === 'ai' && (
-            <AiDesignerTab
-              observation={aiObservation}
-              caseId={aiCaseId}
-              onObservationChange={setAiObservation}
-              onCaseSelect={selectAiCase}
-            />
-          )}
-        </div>
-
-        <div className="mt-12 text-center text-sm text-gray-400">
+        <footer className="mt-12 text-center text-sm text-gray-600">
           <p>{ui.footer.credit}</p>
           <p className="mt-2">
             {ui.footer.visit}{' '}
@@ -98,12 +110,12 @@ export default function App() {
               href="https://santiagobetancur.site"
               target="_blank"
               rel="noreferrer"
-              className="font-medium text-indigo-500 transition-colors hover:text-indigo-600"
+              className="font-medium text-indigo-700 underline underline-offset-2 transition-colors hover:text-indigo-900"
             >
               santiagobetancur.site
             </a>
           </p>
-        </div>
+        </footer>
       </div>
     </div>
   );

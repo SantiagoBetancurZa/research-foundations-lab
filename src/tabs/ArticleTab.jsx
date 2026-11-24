@@ -10,7 +10,7 @@ export default function ArticleTab() {
     <Panel>
       <div className="mb-8 text-center">
         <h2 className="mb-2 text-2xl font-bold text-gray-800">{t.title}</h2>
-        <p className="mx-auto max-w-3xl text-gray-500">{t.intro}</p>
+        <p className="mx-auto max-w-3xl text-gray-600">{t.intro}</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[260px_1fr]">
@@ -46,11 +46,11 @@ export default function ArticleTab() {
               >
                 <div className="mb-4 flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3">
-                    <div className="rounded-2xl bg-white p-3 text-indigo-600 shadow-sm">
+                    <div className="rounded-2xl bg-white p-3 text-indigo-700 shadow-sm">
                       <Icon size={22} />
                     </div>
                     <div>
-                      <p className="mb-1 text-xs font-black uppercase tracking-[0.2em] text-slate-400">
+                      <p className="mb-1 text-xs font-black uppercase tracking-[0.2em] text-slate-600">
                         {t.section(index + 1)}
                       </p>
                       <h3 className="text-lg font-bold text-slate-900">{section.title}</h3>
@@ -61,7 +61,7 @@ export default function ArticleTab() {
                 <p className="mb-4 text-sm leading-relaxed text-slate-700">{section.summary}</p>
 
                 <div className="rounded-2xl border border-indigo-100 bg-white p-4">
-                  <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-indigo-500">
+                  <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-indigo-700">
                     {t.includes}
                   </p>
                   <p className="text-sm leading-relaxed text-slate-700">{section.includes}</p>

@@ -39,11 +39,28 @@ textarea {
   animation: fadeInUp 0.4s ease-out forwards;
 }
 
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.thin-scrollbar {
+  scrollbar-width: thin;
 }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Visible focus for keyboard users on light and dark surfaces: indigo ring plus a white halo. */
+:focus-visible {
+  outline: 3px solid #4338ca;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+/* Respect the operating-system setting to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

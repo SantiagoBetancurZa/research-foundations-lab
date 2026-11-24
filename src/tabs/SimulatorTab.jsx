@@ -56,7 +56,7 @@ export default function SimulatorTab({ onUseCase = () => {} }) {
               key={stat.label}
               className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm"
             >
-              <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-slate-400">
+              <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-slate-600">
                 {stat.label}
               </p>
               <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
@@ -71,7 +71,7 @@ export default function SimulatorTab({ onUseCase = () => {} }) {
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {selectedSimulation.themes.map((theme) => (
             <div key={theme.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="mb-3 text-xs font-black uppercase tracking-[0.2em] text-indigo-500">
+              <p className="mb-3 text-xs font-black uppercase tracking-[0.2em] text-indigo-700">
                 {t.emergingCategory}
               </p>
               <h4 className="mb-2 text-lg font-bold text-slate-900">{theme.title}</h4>
@@ -94,7 +94,7 @@ export default function SimulatorTab({ onUseCase = () => {} }) {
               <div className="h-4 overflow-hidden rounded-full bg-slate-100">
                 <div className={`h-full rounded-full ${bar.color}`} style={{ width: `${bar.value}%` }} />
               </div>
-              <p className="mt-3 text-xs font-medium uppercase tracking-[0.18em] text-slate-400">
+              <p className="mt-3 text-xs font-medium uppercase tracking-[0.18em] text-slate-600">
                 {selectedSimulation.metricLabel}
               </p>
             </div>
@@ -130,18 +130,22 @@ export default function SimulatorTab({ onUseCase = () => {} }) {
           <p className="mx-auto mt-2 max-w-3xl text-gray-600">{t.intro}</p>
         </div>
 
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-3 text-sm font-medium">
+        <ol
+          aria-label={t.progress}
+          className="mb-8 flex flex-wrap items-center justify-center gap-3 text-sm font-medium"
+        >
           {t.phases.map((label, index) => (
-            <div
+            <li
               key={label}
+              aria-current={step === index + 1 ? 'step' : undefined}
               className={`rounded-full px-4 py-2 ${
-                step >= index + 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-500'
+                step >= index + 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'
               }`}
             >
               {index + 1}. {label}
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
 
         {step === 1 && (
           <div className="animate-fade-in-up space-y-6">
@@ -151,6 +155,7 @@ export default function SimulatorTab({ onUseCase = () => {} }) {
                   key={researchCase.id}
                   type="button"
                   onClick={() => selectScenario(researchCase.id)}
+                  aria-pressed={researchCase.id === selectedScenarioId}
                   className={`rounded-3xl border p-5 text-left transition-all ${
                     researchCase.id === selectedScenarioId
                       ? 'border-indigo-300 bg-indigo-50 shadow-md shadow-indigo-100'
@@ -262,7 +267,7 @@ export default function SimulatorTab({ onUseCase = () => {} }) {
               size={68}
               className={`mx-auto mb-6 text-purple-600 ${running ? 'animate-bounce' : ''}`}
             />
-            <p className="mb-2 text-xs font-black uppercase tracking-[0.25em] text-purple-500">
+            <p className="mb-2 text-xs font-black uppercase tracking-[0.25em] text-purple-700">
               {selectedCase.method}
             </p>
             <h3 className="mb-3 text-2xl font-bold text-slate-900">{selectedSimulation.executionLabel}</h3>
@@ -271,7 +276,7 @@ export default function SimulatorTab({ onUseCase = () => {} }) {
             </p>
 
             <div className="mx-auto mt-6 max-w-xl rounded-2xl border border-white/60 bg-white/80 p-4 text-left shadow-sm">
-              <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-slate-400">
+              <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-slate-600">
                 {t.studyQuestion}
               </p>
               <p className="text-sm leading-relaxed text-slate-700">{selectedCase.question}</p>
@@ -331,7 +336,7 @@ export default function SimulatorTab({ onUseCase = () => {} }) {
               </div>
 
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-slate-400">
+                <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-slate-600">
                   {t.closing}
                 </p>
                 <div className="space-y-4 text-sm leading-relaxed text-slate-700">

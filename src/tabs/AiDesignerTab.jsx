@@ -90,7 +90,7 @@ function DesignReport({ design, badge, t }) {
             >
               <div className="mb-2 flex items-center gap-2">
                 <item.icon size={18} className={item.color} />
-                <span className="text-xs font-black uppercase tracking-widest text-gray-400">
+                <span className="text-xs font-black uppercase tracking-widest text-gray-600">
                   {item.label}
                 </span>
               </div>
