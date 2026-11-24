@@ -32,10 +32,16 @@ export default function App() {
   const { ui, content } = useLanguage();
   const [activeTab, setActiveTab] = useState('method');
   const [aiObservation, setAiObservation] = useState('');
+  const [aiCaseId, setAiCaseId] = useState(null);
+
+  const selectAiCase = (caseId) => {
+    const researchCase = content.cases.find((item) => item.id === caseId);
+    setAiCaseId(researchCase ? caseId : null);
+    setAiObservation(researchCase?.seedObservation ?? '');
+  };
 
   const openCaseInAiDesigner = (caseId) => {
-    const researchCase = content.cases.find((item) => item.id === caseId);
-    setAiObservation(researchCase?.seedObservation ?? '');
+    selectAiCase(caseId);
     setActiveTab('ai');
   };
 
@@ -75,7 +81,12 @@ export default function App() {
           {activeTab === 'article' && <ArticleTab />}
           {activeTab === 'simulator' && <SimulatorTab onUseCase={openCaseInAiDesigner} />}
           {activeTab === 'ai' && (
-            <AiDesignerTab observation={aiObservation} onObservationChange={setAiObservation} />
+            <AiDesignerTab
+              observation={aiObservation}
+              caseId={aiCaseId}
+              onObservationChange={setAiObservation}
+              onCaseSelect={selectAiCase}
+            />
           )}
         </div>
 

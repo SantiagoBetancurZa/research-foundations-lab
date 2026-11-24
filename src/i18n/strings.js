@@ -98,12 +98,28 @@ const en = {
   ai: {
     title: 'AI Experimental Designer',
     intro: 'Turn any everyday question into a formal scientific study.',
+    observationLabel: 'Your observation',
+    observationHint: (min, max) =>
+      `Describe something you have noticed in everyday life (${min} to ${max} characters).`,
     placeholder:
       'E.g., I have noticed that ants ignore whole-wheat bread crumbs but go straight for white bread crumbs…',
+    counter: (count, max) => `${count} / ${max} characters`,
+    startFromCase: 'Or start from one of the course cases:',
     generate: 'Generate a Full Scientific Report',
     generating: 'Applying the scientific method…',
-    notConfigured: 'Set VITE_GEMINI_API_KEY to use the AI Designer.',
-    failed: 'Could not connect to the AI lab. Please try again soon.',
+    unavailableTitle: 'The live AI designer is not switched on in this copy of the app.',
+    unavailableText: 'You can still explore an example design prepared in advance for each course case:',
+    sampleBadge: (title) => `Example design prepared in advance for the case “${title}”.`,
+    aiBadge: 'Generated live by AI. Read it critically: it is a starting point, not a final answer.',
+    errors: {
+      invalid_length: (min, max) => `Please write between ${min} and ${max} characters.`,
+      rate_limited: 'Too many requests in a short time. Please wait a minute and try again.',
+      upstream_busy: 'The AI service is busy right now. Please try again in a moment.',
+      blocked:
+        'The AI could not design a study for this observation. Try describing a safe, everyday situation.',
+      timeout: 'The AI took too long to answer. Please try again.',
+      generic: 'Could not reach the AI lab. Please try again soon.',
+    },
     context: 'Research Context',
     methodApplied: 'The Method Applied',
     question: 'Question',
@@ -112,6 +128,7 @@ const en = {
     analysis: 'Analysis',
     conclusion: 'Conclusion',
     communication: 'Communication',
+    ethics: 'Ethics',
     variablesTitle: 'Variables and Concepts',
     independent: 'Independent Variable',
     independentSub: 'The cause',
